@@ -1,0 +1,12 @@
+{
+    "name": "jbagaresgaray/codetest",
+    "authors": [
+        {
+            "name": "Philip Cesar Garay",
+            "email": "pi.philipcesar@gmail.com"
+        }
+    ],
+    "require": {
+    	"mandrill/mandrill": "1.0.*"
+    }
+}

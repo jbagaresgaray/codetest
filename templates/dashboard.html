@@ -1,0 +1,76 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Sample App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="">Home</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="starter-template" ng-init="initCodes()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 form-group pull-left">
+                    <button class="btn btn-primary" type="button" ng-click="openModal()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
+                    </button>
+                    <button class="btn btn-success" type="button" ng-click="initCodes()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Refresh
+                    </button>
+                </div>
+                <div class="col-md-6 pull-right form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="txtSearch" placeholder="Search" aria-describedby="Search">
+                        <span class="input-group-btn">
+                        <button class="btn btn-success" type="button">Search</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div cg-busy="myPromise"></div>
+                        <table class="table table-hover" id="codeTable">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Product</th>
+                                    <th>Suburb</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="code in codes | filter:txtSearch ">
+                                    <td>{{code.row.code}}</td>
+                                    <td>{{code.row.product}}</td>
+                                    <td>{{code.row.suburb}}</td>
+                                    <td>{{code.row.time}}</td>
+                                    <td>
+                                        <a href="#/main/dashboard/{{code.key}}" class="update-icon btn btn-primary btn-xs"> <i class="glyphicon glyphicon-pencil"></i></a>
+                                        <a href="" ng-click="confirmDelete(code.key)" class="delete-icon btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
