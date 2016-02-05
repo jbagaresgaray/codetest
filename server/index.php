@@ -9,12 +9,7 @@
 	  case 'POST':
 	  		$data=file_get_contents( 'php://input' );
 	  		$res = json_decode($data);
-	  		$test = array(
-  				"email" => $res->sendTo->email,
-  				"name" => $res->sendTo->name,
-  				"type" => 'to'
-  			);
-	    	DataController::sendMail($res,$test);
+	    	DataController::sendMail($res,$res->sendTo);
 	    break;
 	  case 'GET':
 	  	if(isset($request) && !empty($request) && $request[0] !== ''){
