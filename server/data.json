@@ -1,5 +1,5 @@
 [
-    {"firstName":"John", "lastName":"Doe", "email":"email1@domain"}, 
-    {"firstName":"Anna", "lastName":"Smith", "email":"email2@domain"},
-    {"firstName":"Peter","lastName":"Jones", "email":"email3@domain"}
+    {"firstName":"John", "lastName":"Doe", "email":"email1@yopmail.com"}, 
+    {"firstName":"Anna", "lastName":"Smith", "email":"email2@yopmail.com"},
+    {"firstName":"Peter","lastName":"Jones", "email":"email3@yopmail.com"}
 ]

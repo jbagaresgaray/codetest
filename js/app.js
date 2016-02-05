@@ -1,5 +1,6 @@
 'use strict';
-angular.module('starter', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr'])
+
+angular.module('starter', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr','ngTable','ngDialog'])
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
         	.state('login', {
@@ -15,10 +16,11 @@ angular.module('starter', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate
                 url: '/dashboard',
                 views: {
                     'mainView': {
-                        templateUrl: 'templates/dashboard.html'
+                        templateUrl: 'templates/dashboard.html',
+                        controller: 'mainCtrl'
                     }
                 }
             })
 
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/main/dashboard');
     }]);

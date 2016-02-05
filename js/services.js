@@ -12,6 +12,15 @@ angular.module('starter')
                 }).then(function(res) {
                     return res.data;
                 });
+            },
+            sendMessage: function(data){
+                return $http({
+                    url: '/server/index.php',
+                    method: 'POST',
+                    data: data
+                }).then(function(res) {
+                    return res.data;
+                });
             }
         }
     }]);

@@ -18,51 +18,41 @@
     </div>
 </nav>
 <div class="container">
-    <div class="starter-template" ng-init="initCodes()">
+    <div class="starter-template" ng-init="init()">
         <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-6 form-group pull-left">
-                    <button class="btn btn-primary" type="button" ng-click="openModal()">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
-                    </button>
-                    <button class="btn btn-success" type="button" ng-click="initCodes()">
-                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>Refresh
-                    </button>
-                </div>
-                <div class="col-md-6 pull-right form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" ng-model="txtSearch" placeholder="Search" aria-describedby="Search">
-                        <span class="input-group-btn">
+        <div class="col-md-12">
+            <div class="col-md-6 pull-right form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="txtSearch" placeholder="Search" aria-describedby="Search">
+                    <span class="input-group-btn">
                         <button class="btn btn-success" type="button">Search</button>
                     </span>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <div cg-busy="myPromise"></div>
-                        <table class="table table-hover" id="codeTable">
+                        <table class="table table-hover" id="codeTable" ng-table="tableParams">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
-                                    <th>Product</th>
-                                    <th>Suburb</th>
-                                    <th>Time</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <th>Email Address</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="code in codes | filter:txtSearch ">
-                                    <td>{{code.row.code}}</td>
-                                    <td>{{code.row.product}}</td>
-                                    <td>{{code.row.suburb}}</td>
-                                    <td>{{code.row.time}}</td>
+                                <tr ng-repeat="row in $data">
+                                    <td  sortable="'firstName'">{{row.firstName}}</td>
+                                    <td  sortable="'lastName'">{{row.lastName}}</td>
+                                    <td  sortable="'email'">{{row.email}}</td>
                                     <td>
-                                        <a href="#/main/dashboard/{{code.key}}" class="update-icon btn btn-primary btn-xs"> <i class="glyphicon glyphicon-pencil"></i></a>
-                                        <a href="" ng-click="confirmDelete(code.key)" class="delete-icon btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                                        <a href="" ng-click="openMail(row)" class="update-icon btn btn-primary btn-xs"> <i class="glyphicon glyphicon-envelope"></i></a>
+                                        <a href="" ng-click="confirmDelete($index)" class="delete-icon btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
