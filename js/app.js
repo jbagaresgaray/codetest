@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr','ngTable','ngDialog'])
+angular.module('starter', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'toastr','ngTable','ngDialog','toastr'])
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
         	.state('login', {

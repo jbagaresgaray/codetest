@@ -7,7 +7,7 @@
 
 	switch ($method) {
 	  case 'POST':
-	  		$data=file_get_contents( 'php://input' );
+	  		$data=file_get_contents('php://input');
 	  		$res = json_decode($data);
 	    	DataController::sendMail($res,$res->sendTo);
 	    break;

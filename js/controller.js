@@ -66,28 +66,36 @@ angular.module('starter')
                 modalInstance.result.then(function(selectedItem) {
                     console.log('selectedItem: ', selectedItem);
                 }, function() {
-                    $log.info('Modal dismissed at: ' + new Date());
+                    console.info('Modal dismissed at: ' + new Date());
                 });
             };
         }
     ])
-    .controller('ModalInstanceCtrl', function($scope, $uibModalInstance,senderDetails,dataFactory) {
-    	console.log('senderDetails: ',senderDetails);
+    .controller('ModalInstanceCtrl', function($scope, $uibModalInstance, toastr, senderDetails, dataFactory) {
+        console.log('senderDetails: ', senderDetails);
 
-    	$scope.data = {};
-    	$scope.data.to = senderDetails.email;
-    	$scope.data.sendTo = {
-    		email: senderDetails.email,
-    		name: senderDetails.fistName + ' ' + senderDetails.lastName,
-    		type: 'to'
-    	};
+        $scope.data = {};
+        $scope.data.to = senderDetails.email;
+        $scope.data.sendTo = {
+            email: senderDetails.email,
+            name: senderDetails.fistName + ' ' + senderDetails.lastName,
+            type: 'to'
+        };
 
         $scope.send = function() {
-        	console.log('data: ', $scope.data);
-        	dataFactory.sendMessage($scope.data).then(function(response){
-        		console.log('response: ',response);
-        	});
-            // $uibModalInstance.close('save');
+            console.log('data: ', $scope.data);
+            dataFactory.sendMessage($scope.data).then(function(response) {
+                console.log('response: ', response);
+                if(response){
+                    var res = response[0];
+                    if(res.status === 'sent'){
+                        toastr.success('Email Message Successully Sent', 'Message Send!');
+                        $uibModalInstance.close('save');
+                    }else{
+                        toastr.info(res.status, 'Information');
+                    }
+                }
+            });
         };
 
         $scope.cancel = function() {

@@ -8,26 +8,28 @@ class DataController {
     }
 
     public static function sendMail($data,$to){
-		$mandrill = new Mandrill('BqCdfa7PNOzYJl9qiBT1iA');
-		$message = new stdClass();
-		$message->text = $data->message;
-		$message->subject = $data->subject;
-		$message->from_email = $data->email;
-		$message->from_name  = "Your name";
-		// $message->to = array($to);
-		// $message->to = array(array("email" => ));
-		$message->to = array(array(
-									'email' => $to->email,
-			            			'name' => $to->name,
-			            			'type' => 'to'
-		            			)
-		            		);
-		$message->track_opens = true;
+    	try {
+			$mandrill = new Mandrill('BqCdfa7PNOzYJl9qiBT1iA');
+			$message = array(
+				'text' => $data->message,
+				'subject' => $data->subject,
+				'from_email' => $data->email,
+				'from_name'  => "John Doe",
+				'to' => array(
+					array('email' => $to->email,'name' => $to->name)
+			    ),
+				'track_opens' => true
+			);
+			$response = $mandrill->messages->send($message);
 
-		$response = $mandrill->messages->send($data->message);
-
-		return print_r(json_encode($response));
-		// return print_r(json_encode(array('$data'=>$data,'$to'=>$to)));
+			return print_r(json_encode($response));
+			// return print_r(json_encode(array('$data'=>$data,'$to'=>$to)));
+		} catch(Mandrill_Error $e) {
+		//     // Mandrill errors are thrown as exceptions
+		    return print_r('A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage());
+		//     // A mandrill error occurred: Mandrill_Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+		     throw $e;
+		}
 	}
 
 	public static function getData(){
